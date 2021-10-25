@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript alapok</title>
+
+    <script src="../js/sajat.js"></script>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            $("p").click(function() {
+                $(this).width("200px");
+                $(this).css("background-color","#dedede");
+            });
+        });
+        $(function() {
+            $("h1").click(function() {
+                $(this).html("Szia Világ");
+                $(this).prepend("<hr style='height: 10px;background-color: blue'>");
+            });
+        });
+        $(function() {
+            $("#elso").click(function() {
+                $(this).html("Szia Világ");
+                $(this).prepend("<hr style='height: 10px;background-color: blue'>");
+            });
+        });
+        $(function() {
+            $(".elso").click(function() {
+                $(this).css("font-size","20px");
+            });
+        });
+        $(function() {
+            $("#a").focus(function() {
+                if ($("#focus").prop("checked")){
+                $(this).css("background-color","lightblue");}
+            });
+            $("#a").blur(function() { //Arrow function nem mukodik vele
+                $(this).css("background-color","white");
+            });
+        });
+    </script>
+</head>
+<body>
+<!--
+<button type="button" onclick="document.write('Hello')">Próbáld ki</button>
+
+<h1 onclick="valtoztat(this)"> Kattints ide!</h1>
+Szia
+<h1 onclick="ujdoc()">W3schools</h1>
+<h1 onclick="vissza()">Vissza</h1>
+<h2>SZííín</h2>
+
+-->
+<h1 style="background-color: red">Hello</h1>
+
+<form id="form">
+
+    A = <input id="a"><br>
+    B = <input id="b"><br>
+    Focus: <input type="checkbox" id="focus">
+</form>
+<div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis massa non elementum porta. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Cras vitae pharetra ipsum.
+        Pellentesque porttitor et purus eu efficitur. Proin placerat lacinia nibh,
+        ac commodo enim imperdiet eu.
+    </p>
+</div>
+
+<div>
+    <p id="elso">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis massa non elementum porta. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Cras vitae pharetra ipsum.
+        Pellentesque porttitor et purus eu efficitur. Proin placerat lacinia nibh,
+        ac commodo enim imperdiet eu.
+    </p>
+    <p class="elso">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis massa non elementum porta. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Cras vitae pharetra ipsum.
+        Pellentesque porttitor et purus eu efficitur. Proin placerat lacinia nibh,
+        ac commodo enim imperdiet eu.
+    </p>
+    <p class="elso">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis massa non elementum porta. Interdum et malesuada
+    fames ac ante ipsum primis in faucibus. Cras vitae pharetra ipsum.
+    Pellentesque porttitor et purus eu efficitur. Proin placerat lacinia nibh,
+    ac commodo enim imperdiet eu.
+</p>
+</div>
+</body>
+</html>

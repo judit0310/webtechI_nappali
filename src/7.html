@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM gyak</title>
+    <script>
+        var gyumolcs;
+        gyumolcs = ["Szilva", "Körte", "Alma", "Cseresznye", "Szőlő", "Dió"];
+        var text = "<ul>";
+
+        for (gyumi of gyumolcs) {
+            text += "<li>" + gyumi + "</li>";
+        }
+        text += "</ul>";
+
+        function kicserel() {
+            document.getElementById("elso").innerHTML = text;
+            var z = document.querySelectorAll("div>p");
+            for (var divpelem of z) {
+                console.log(divpelem.innerHTML);
+                divpelem.innerHTML = "Hello";
+                divpelem.style.backgroundColor = "red";
+            }
+
+        };
+        document.onreadystatechange = function () {
+            if (document.readyState == "complete") {
+                var y = document.getElementsByTagName("p");
+                for (var pelem of y) {
+                    console.log(pelem.innerHTML);
+                }
+                document.getElementById("elso").innerHTML = "Ezen az oldalon van: " +window.location.href;
+
+            }
+        }
+
+        function italic(id) {
+            id.style.fontStyle = "italic";
+        }
+
+        function hozzaad() {
+            var szammezo = document.getElementById("db");
+            var szam = szammezo.value;
+            console.log(szam);
+            var div = document.getElementById("szoveg");
+            for (var i = 0; i< szam; i++) {
+                var para = document.createElement("p");
+                para.id = "par"+ (i+1);
+                var node = document.createTextNode("Ez az uj szoveg");
+                para.appendChild(node);
+                div.appendChild(para);
+
+                //div.removeChild(patientzero);
+            }
+            var para = document.createElement("p");
+            var node = document.createTextNode("Ezek a szövegek");
+            para.appendChild(node);
+            var patientzero = document.getElementById("param0");
+            div.replaceChild(para,patientzero);
+
+
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+<p id="elso"> Lorem ipsum</p>
+<button type="button" onclick="kicserel()">Kicserél!</button>
+
+<p onclick="italic(this)">Lorem ipsum</p>
+
+<p>Lorem ipsum</p>
+<div onclick="italic(this)" id="szoveg">
+    <p id="param0">Lorem ipsum</p>
+</div>
+Hány új elemet vigyünk fel? <input id="db" type="number" min="1" max="12">
+<button type="button" onclick="hozzaad()">Hozzáad!</button>
+</body>
+</html>
