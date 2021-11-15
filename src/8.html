@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Űrlap validálás példa</title>
+  <script type="text/javascript">
+    function validal(){
+      var form = document.forms["form1"];
+      var file = form["file"].value;
+      console.log(file);
+
+
+      var elfogadhato_kiterjesztesek = new Array("jpg","jpeg","png","gif","svg");
+      var kiterjesztes = file.split('.').pop().toLowerCase();
+      console.log(kiterjesztes);
+      if(!elfogadhato_kiterjesztesek.includes(kiterjesztes)){
+        alert("Rossz fájlformátum");
+        return false;
+      }
+
+      var vezeteknev = form["vezeteknev"].value;
+      if (vezeteknev.trim().length < 3){
+        alert("Vezetéknév túl rövid");
+        return false;
+      }
+      var jelszo = form["jelszo"].value;
+      var jelszoPattern = new RegExp('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)[A-Za-z\\d]{8,}$')
+      if (!jelszoPattern.test(jelszo)){
+        alert("A jelszónak tartalmaznia kell legalább egy " +
+                "kisbetűt, egy nagybetűt, egy számot, és legalább 8 hosszú");
+        return false;
+      }
+      var szuletesi_datum = form["szuletesi_datum"].value;
+      var ma = new Date().toISOString().slice(0,10);
+      if (szuletesi_datum> ma){
+        alert("Mikor születtél?!?!");
+        return false;
+      }
+      var nagykoruhatar = new Date();
+      nagykoruhatar.setFullYear(nagykoruhatar.getFullYear()-18);
+      nagykoruhatar = nagykoruhatar.toISOString().slice(0,10);
+      if (szuletesi_datum > nagykoruhatar){
+        alert("Még nem nagykorú");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+</head>
+<body>
+
+<form action="/feldolgoz" target="_blank" method="get" id="form1" onsubmit="return validal();">
+  <fieldset>
+    <legend>Alap adatok:</legend>
+    <label for="vezeteknev">Vezetéknév</label>
+    <input id="vezeteknev" type="text" name="vezeteknev"/><br>
+    <label for="keresztnev">Keresztnév</label>
+    <input type="text" name="keresztnev" id="keresztnev"><br>
+    <label for="jelszo">Jelszo</label>
+    <input type="password" name="jelszo" id="jelszo"><br>
+    <input type="submit" value="Elküldés">
+    <label for="html">HTML</label>
+    <input id="html" name="kedvenc" type="radio" value="HTML"><br>
+    <label for="css">CSS</label>
+    <input type="radio" name="kedvenc" id="css" value="CSS"><br>
+    <label for="javascript">JavaScript</label>
+    <input id="javascript" name="kedvenc" type="radio" value="JavaScript"><br>
+
+    <label for="orul">Örül?</label>
+    <input type="checkbox" id="orul" name="orul" value="Igen" checked><br>
+    <label for="szin"></label><input type="color" id="szin" name="szin" value="#fe1258"><br>
+    <label for="szuletesi_datum" >Születési dátum:</label>
+    <input type="date" name="szuletesi_datum" id="szuletesi_datum" required min="1900-01-01" ><br><!-- Max a mai nap lesz-->
+    <label for="meeting">Mikor legyen a meeting?</label>
+    <input type="datetime-local" id="meeting" name="meeting" min="2021-09-28T00:00" ><br> <!-- Max a mai nap lesz-->
+    <label for="email"></label><input type="email" name="email" id="email"><br>
+    <label for="file">Feltöltendő állomány</label>
+    <input type="file" name="file" id="file" accept=".jpg, .jpeg" ><br>
+    <label for="felev">Félév kezdete</label>
+    <input type="month" name="felev" id="felev"><br>
+    <label for="kor">Kor</label>
+    <input type="number" id="kor" name="kor" min="0" max="130" maxlength="3" step="1"><br>
+    <label>Értékelés</label>
+    <input type="range" id="ertekeles" name="ertekeles" min="1" max="10" step="0.5"><br>
+    <label for="ora">Óra kezdete</label><input type="time" id="ora" name="ora"><br>
+
+    <label for="iranyitoszam">Irányítószám</label><input  required placeholder="2222" type="text" id="iranyitoszam" name="iranyitoszam" pattern="[1-9][0-9]{3}"><br>
+
+
+
+    <button type="submit">Küldés</button>
+
+    <select id="nem" name="nem" multiple size="1">
+      <option value="ferfi">Férfi</option>
+      <option value="no">Nő</option>
+      <option value="egyeb" selected>Egyéb</option>
+    </select>
+  </fieldset>
+  <input list="nem2" name="nem2">
+  <datalist id="nem2">
+    <option value="ferfi"></option>
+    <option value="no"></option>
+  </datalist>
+  <textarea name="uzenet" rows="10" cols="30">
+    </textarea>
+
+
+
+</form>
+
+</body>
+</html>
